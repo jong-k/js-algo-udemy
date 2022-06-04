@@ -10,3 +10,9 @@
 - 간단한 문제 해결 패턴 소개
   - `sliding window`, `two pointer` ...
 ### 2. 재귀 (Recursion)
+- base case
+- 재귀 함수 패턴
+- 자주 발생하는 에러
+### 3. 탐색 알고리즘
+- 이분 탐색 : O(N)
+- 선형 탐색 : O(logN)
