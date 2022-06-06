@@ -24,4 +24,8 @@
 - 심화 정렬 (효율적 - O(N logN))
   - 합병
   - 퀵
-  - 기수 (Radix Sort)
+  - 기수 (Radix Sort)\
+### 5. 연결리스트 (Linked List)
+- 배열에 비해 삽입, 제거가 빠름
+- 단일 연결 리스트 (Single Linked List)
+- 이중 연결 리스트 (Double Lnked List)
