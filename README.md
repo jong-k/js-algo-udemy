@@ -28,4 +28,6 @@
 ### 5. 연결리스트 (Linked List)
 - 배열에 비해 삽입, 제거가 빠름
 - 단일 연결 리스트 (Single Linked List)
+  - Head에서 Tail까지 한 방향으로만 탐색 가능
 - 이중 연결 리스트 (Double Lnked List)
+  - 양방향 탐색 가능
