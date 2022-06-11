@@ -48,3 +48,15 @@
   - 값들은 모두 유일한 값(unique)
   - 부모 노드의 왼쪽 자식 노드는 부모 노드보다 작고,
   - 오른쪽 나식 노드는 부모 노드보다 크다
+
+  
+- 트리의 모든 노드를 1번씩 방문하는 방법 2가지
+  - BFS(Breadth First Search) : 너비 우선 탐색
+    - 동일한 depth의 노드를 전부 방문하고 나서야 다음 depth로 넘어감
+  - DFS(Depth First Search) : 깊이 우선 탐색
+    - leaf까지 쭉내려갔다가 sibling이 있던 노드의 다음 sibling을 탐색하며 반복
+
+
+- DFS 3가지 방법
+  - 전위 탐색 (pre order) : 깊이 상관 없이 제일 왼족을 먼저 방문
+  - 후위 탐색 (post order) : 
