@@ -1,3 +1,5 @@
+// 문자열을 입력받고 거꾸로 뒤집어 반환하는 함수
+// 예시
 // reverse('awesome') // 'emosewa'
 // reverse('rithmschool') // 'loohcsmhtir'
 
