@@ -9,5 +9,6 @@
 function someRecursive(array, callback) {
   if (array.length === 0) return false;
   if (callback(array[0])) return true;
+  // index 1부터 새로운 배열을 만들고 재귀
   return someRecursive(array.slice(1), callback);
 }
