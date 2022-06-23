@@ -1,6 +1,6 @@
 function flatten(oldArr) {
-  var newArr = [];
-  for (var i = 0; i < oldArr.length; i++) {
+  let newArr = [];
+  for (let i = 0; i < oldArr.length; i++) {
     if (Array.isArray(oldArr[i])) {
       newArr = newArr.concat(flatten(oldArr[i]));
     } else {
@@ -9,3 +9,5 @@ function flatten(oldArr) {
   }
   return newArr;
 }
+
+console.log(flatten([1, 2, [3, 4, [5, 6, [7, 8]]]]))

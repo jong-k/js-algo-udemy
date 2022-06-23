@@ -7,4 +7,5 @@ function flatten(array) {
   return array.flat(Infinity);
 }
 
-console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
+console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])); // [ 1, 2, 3 ]
+console.log(flatten([1, 2, [3, 4, [5, 6, [7, 8]]]])); // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
