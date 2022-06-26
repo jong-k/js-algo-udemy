@@ -1,7 +1,7 @@
 // 재귀 안쓰는 방법
 
 function capitalizeFirst (arr) {
-  let newArr = [];
+  const newArr = [];
   for (let el of arr) {
     const first = el[0].toUpperCase();
     const newWord = first + el.slice(1);
