@@ -25,10 +25,10 @@ function maxSubarraySum(arr, num) {
   if (num > arr.length) {
     return null;
   }
-  var max = -Infinity; // 음의 무한대 (모든 음수들보다 작음) -> 음수만 있는 배열도 가능
+  let max = -Infinity; // 음의 무한대 (모든 음수들보다 작음) -> 음수만 있는 배열도 가능
   // arr.length - num + 1 : window 수
   for (let i = 0; i < arr.length - num + 1; i++) {
-    temp = 0;
+    let temp = 0;
     // 개별의 window
     for (let j = 0; j < num; j++) {
       // arr[i + j]를 통해 i++ 될 때마다 연속하는 배열을 구할 수 있다
