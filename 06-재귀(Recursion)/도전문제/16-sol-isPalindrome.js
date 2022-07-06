@@ -4,3 +4,5 @@ function isPalindrome(str) {
   if (str[0] === str.slice(-1)) return isPalindrome(str.slice(1, -1));
   return false;
 }
+
+// 4번째 라인에서 str.slice(-1)로 마지막 글자 1개를 추출해냈음
