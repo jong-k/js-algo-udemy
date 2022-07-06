@@ -54,14 +54,15 @@
 - 리팩토링할 다른 방식을 생각할 수 있는가? (회사의 코드 컨벤션 등에 맞는지)
 - 다른 사람들은 어떻게 문제를 해결했는지 확인했는가?
 
-for loop 대신 for of 문 사용하기
 
-```javascript
+- 예) for loop 대신 for of 문 사용하기
+
+```js
 // 리팩토링 전
 function charCount(str) {
-  var obj = {};
-  for(var i = 0; i < str.length; i++) {
-    var char = str[i].toLowerCase();
+  const obj = {};
+  for(let i = 0; i < str.length; i++) {
+    const char = str[i].toLowerCase();
     if(/[a-z0-9]/.test(char)) { // 참고로 브라우저나 환경에 따라 정규식의 수행속도가 조금씩 다르다(크롬에서 이슈있었음)
       obj[char]++;
     } else {
@@ -71,11 +72,11 @@ function charCount(str) {
   return obj;
 }
 ```
-```javascript
+```js
 // 리팩토링 후
 function charCount(str) {
-  var obj = {};
-  for(var char of str) { // str에서 순서대로 1개씩 char에 할당
+  const obj = {};
+  for(let char of str) { // str에서 순서대로 1개씩 char에 할당
     if(isAlphaNumeric(char)) {
       char = char.toLowerCase();
       obj[char] = ++obj[char] || 1; // 정규식을 만족하면 obj[char]에 +1 증가한 수를 할당하고 아니면 1을 할당
@@ -86,7 +87,7 @@ function charCount(str) {
 
 // 분리된 함수를 통해 가독성 향상
 function isAlphaNumeric(char) {
-  var code = char.charCodeAt();
+  const code = char.charCodeAt();
   if(!(code > 47 && code < 58) && 
      !(code > 64 && code < 91) &&
      !(code > 96 && code < 123)) {
