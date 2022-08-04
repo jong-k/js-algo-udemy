@@ -13,7 +13,7 @@ class DoublyLinkedList {
     this.tail = null;
     this.length = 0;
   }
-  
+
   push(val) {
     const newNode = new Node(val);
     if (this.head === null) {
@@ -27,23 +27,21 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
-  
+
   pop() {
     if (this.head === null) return undefined;
-    else {
-      const poppedNode = this.tail;
-      if (this.length === 1) {
-        this.head = null;
-        this.tail = null;
-      } else {
-        this.tail = poppedNode.prev;
-        this.tail.next = null;
-        poppedNode.prev = null; // 굳이 필요할지 의문
-      }
-      this.length--;
-      return poppedNode;
+    const poppedNode = this.tail;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = poppedNode.prev;
+      this.tail.next = null;
+      poppedNode.prev = null;
     }
-  }
+    this.length--;
+    return poppedNode;
+    }
 
   shift() {
     if (this.length === 0) return undefined;
@@ -75,17 +73,17 @@ class DoublyLinkedList {
   }
 
   get(idx) {
+    if (idx < 0 || idx > this.length - 1) return null;
     let count;
     let currentNode;
-    if (idx < 0 || idx > this.length - 1) return null;
-    else if (idx < this.length / 2) {
+    if (idx < this.length / 2) {
       count = 0;
       currentNode = this.head;
       while (count !== idx) {
         count++;
         currentNode = currentNode.next;
       }
-    } else if (idx >= this.length / 2) {
+    } else {
       count = this.length - 1;
       currentNode = this.tail;
       while (count !== idx) {
@@ -99,10 +97,48 @@ class DoublyLinkedList {
   set(idx, val) {
     let foundNode = this.get(idx);
     if (!foundNode) return false;
-    else {
-      foundNode.val = val;
-    }
+    foundNode.val = val;
     return true;
+  }
+
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length - 1) return false;
+    if (idx === 0 && this.unshift(val)) return true;
+    if (idx === this.length - 1 && this.push(val)) return true;
+    const newNode = new Node(val);
+    const prevNode = this.get(idx - 1);
+    const originalNode = this.get(idx);
+    prevNode.next = newNode;
+    newNode.prev = prevNode;
+    newNode.next = originalNode;
+    originalNode.prev = newNode;
+    this.length++;
+    return true;
+  }
+
+  remove(idx) {
+    if (idx < 0 || idx > this.length - 1) return undefined;
+    if (idx === 0) return this.shift();
+    if (idx === this.length - 1) return this.pop();
+    const foundNode = this.get(idx);
+    foundNode.prev.next = foundNode.next;
+    foundNode.next.prev = foundNode.prev;
+    foundNode.prev = null;
+    foundNode.next = null;
+    this.length--;
+    return foundNode;
+  }
+  // T         H
+  // 11 12 13 14
+  reverse() {
+    [this.head, this.tail] = [this.tail, this.head];
+    // 뒤의 head에서부터 start ~ tail.next가 null이 될때까지 순회 (현재는 12)
+    let currentNode = this.head;
+    while (currentNode) {
+      [currentNode.next, currentNode.prev] = [currentNode.prev, currentNode.next];
+      currentNode = currentNode.next;
+    }
+    return this;
   }
 }
 
