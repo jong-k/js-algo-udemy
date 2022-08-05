@@ -1,14 +1,17 @@
-function insertionSort(arr) {
-  for (var i = 1; i < arr.length; i++) {
-    var currentVal = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
-      arr[j + 1] = arr[j];
-      console.log(arr);
+const test = [45, 12, 85, 32, 89, 39, 69, 44, 42, 1, 6, 8];
+
+const insertionSort = (arr) => {
+  let temp;
+  for (let i = 1; i < arr.length;  i++) {
+    for (let j = i; j > 0; j--) {
+      if (arr[j] < arr[j - 1]) {
+        temp = arr[j];
+        arr[j] = arr[j - 1];
+        arr[j - 1] = temp;
+      }
     }
-    arr[j + 1] = currentVal;
-    console.log(arr);
   }
-  return arr;
+  console.log(arr);
 }
 
-console.log(insertionSort([2, 1, 9, 76, 4]));
+insertionSort(test) // [1, 6, 8, 12, 32, 39, 42, 44, 45, 69, 85, 89]
