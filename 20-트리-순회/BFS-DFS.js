@@ -72,8 +72,32 @@ class BinarySearchTree {
     const data = [];
     const current = this.root;
     const traverse = (node) => {
-      data.push(node);
+      data.push(node); // node.val로 해도 됨
+      node.left && traverse(node.left);
+      node.right && traverse(node.right);
+    }
+    traverse(current);
+    return data;
+  }
+
+  DFSPostOrder() {
+    const data = [];
+    const current = this.root;
+    const traverse = (node) => {
       if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node); // node.val로 해도 됨
+    }
+    traverse(current);
+    return data;
+  }
+
+  DFSInorder() {
+    const data = [];
+    const current = this.root;
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      data.push(node); // node.val로 해도 됨
       if (node.right) traverse(node.right);
     }
     traverse(current);
