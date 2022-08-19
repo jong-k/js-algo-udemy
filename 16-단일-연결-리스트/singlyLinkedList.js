@@ -142,6 +142,19 @@ class SinglyLinkedList {
     }
     console.log(arr); // 리스트를 어레이 형태로 출력
   }
+
+  rotate(num) { // n회 회전
+    const realNum = num % 5;
+    if (realNum > 0) {
+      for (let i = 0; i < realNum; i++) {
+        this.push(this.shift().val);
+      }
+    } else if (realNum < 0) {
+      for (let i = 0; i < -realNum; i++) {
+        this.unshift(this.pop().val);
+      }
+    }
+  }
 }
 
 const myList = new SinglyLinkedList();
