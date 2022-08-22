@@ -17,7 +17,7 @@ function nestedEvenSum (obj, sum = 0) {
 }
 
 
-var obj1 = {
+const obj1 = {
   outer: 2,
   obj: {
     inner: 2,
@@ -29,7 +29,7 @@ var obj1 = {
   }
 }
 
-var obj2 = {
+const obj2 = {
   a: 2,
   b: {b: 2, bb: {b: 3, bb: {b: 2}}},
   c: {c: {c: 2}, cc: 'ball', ccc: 5},
