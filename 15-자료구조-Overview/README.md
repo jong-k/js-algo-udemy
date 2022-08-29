@@ -65,7 +65,7 @@ class Student {
     return this.scores;
   }
   calculateAverage() {
-    const sum = this.scores.reduce((a,b) => a + b);
+    const sum = this.scores.reduce((a, b) => a + b);
     return sum / this.scores.length;
   }
 }
