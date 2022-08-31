@@ -3,7 +3,6 @@ class Node {
     this.val = val;
     this.next = null;
   }
-
 }
 
 class Queue {

@@ -1,4 +1,4 @@
-let q = [];
+const q = [];
 
 q.push("FIRST")
 q.push("SECOND")
