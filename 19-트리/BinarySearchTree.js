@@ -56,4 +56,4 @@ class BinarySearchTree {
   }
 }
 
-let tree = new BinarySearchTree();
+const tree = new BinarySearchTree();
