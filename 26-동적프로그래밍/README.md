@@ -44,10 +44,10 @@ function fib(n) {
 - fib(3), fib(4) 등의 기초 작업을 한번씩만 풀고 해답을 저장해서 활용하면 복잡도를 낮출 수 있다
 
 ## 3. 종류
-- memoization (Top-down)
-- tabulation (Bottom-up)
+- 재귀 (Top-down)
+- 반복 - tabulation (Bottom-up)
 
-### 3-1. memoization solution
+### 3-1. Recursive(재귀) Solution
 기본형
 ```js
 function fib(n, memo = []) {
@@ -72,11 +72,11 @@ function fib(n, memo = [undefined, 1, 1]) {
 }
 ```
 
-### 메모이제이션 방식의 시간복잡도
+### 재귀 DP의 시간복잡도
 - O(N)
 - 일반 재귀 : O(2^N) 에 비해 훨씬 발전된 것을 보인다
 
-### 3-2. tabulation solution
+### 3-2. Tabulation(반복) Solution
 - 연산 결과를 테이블(주로 배열)에 저장하기 때문에 tabulation 이라는 이름을 가짐
 - 보통 반복문을 사용
 - 더 나은 공간 복잡도라는 장점이 있다
