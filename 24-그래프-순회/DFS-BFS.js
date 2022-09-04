@@ -11,12 +11,8 @@ class Graph {
     this.adjacencyList[v2].push(v1);
   }
   removeEdge(v1, v2) {
-    this.adjacencyList[v1] = this.adjacencyList[v1].filter(v => {
-      return v !== v2;
-    });
-    this.adjacencyList[v2] = this.adjacencyList[v2].filter(v => {
-      return v !== v1;
-    });
+    this.adjacencyList[v1] = this.adjacencyList[v1].filter(v => v !== v2);
+    this.adjacencyList[v2] = this.adjacencyList[v2].filter(v => v !== v1);
   }
   removeVertex(name) {
     while (this.adjacencyList[name].length) {
@@ -25,27 +21,66 @@ class Graph {
     }
     delete this.adjacencyList[name];
   }
-  DFSR(start) {
+  /*
+  {
+    A: [B, C],
+    B: [A, D],
+    C: [A, E],
+    D: [B, E, F],
+    E: [C, D, F],
+    F: [D, E]
+  }
+  */
+  depthFirstSearchRecursive(start) {
     const result = [];
-    const visited = {};
-    const adjacencyList = this.adjacencyList;
+    const isVisited = {};
 
-    (function dfs(vertex) {
-      if (!vertex) return null;
-      visited[vertex] = true;
+    const DFSR = (vertex) => {
+      // if (!this.adjacencyList[vertex].length) return; // 이렇게 안하고 아래처럼 해도 됨
+      if (!vertex) return;
       result.push(vertex);
-      adjacencyList[vertex].forEach(neighbor => {
-        if(!visited[neighbor]) {
-          return dfs(neighbor);
+      isVisited[vertex] = true;
+      this.adjacencyList[vertex].forEach(v => {
+        if (!isVisited[v]) DFSR(v);
+      });
+    }
+    DFSR(start);
+    return result; // [A, B, D ,E, C, F] (반시계 방향 순회함)
+  }
+  depthFirstSearchIterative(start) {
+    const stack = [start];
+    const result = [];
+    const isVisited = {[start]: true}; // [] 안에 안넣으면 일반 문자열로 인식됨
+    while (stack.length) {
+      const currentVertex = stack.pop();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach(neighbor => {
+        if (!isVisited[neighbor]) {
+          isVisited[neighbor] = true;
+          stack.push(neighbor);
         }
-      })
-    })(start)
-
-    return result;
+      });
+    }
+    return result; // ['A', 'C', 'E', 'F', 'D', 'B'] -> 재귀 DFS와 결과 다름 (시계방향)
+    // 스택 구조이기 때문에 가장 빠른 B가 나중에 방문됨!
+  }
+  BreadthFirstSearch(start) {
+    const queue = [start];
+    const result = [];
+    const isVisited = {[start]: true}; // [] 안에 안넣으면 일반 문자열로 인식됨
+    while (queue.length) {
+      const currentVertex = queue.shift();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach(neighbor => { // slice().reverse() 하면 순서 거꾸로 가능
+        if (!isVisited[neighbor]) {
+          isVisited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+    return result; // ['A', 'B', 'C', 'D', 'E', 'F']
   }
 }
-
-
 
 const g = new Graph();
 
