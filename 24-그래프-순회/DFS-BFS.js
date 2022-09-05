@@ -40,8 +40,8 @@ class Graph {
       if (!vertex) return;
       result.push(vertex);
       isVisited[vertex] = true;
-      this.adjacencyList[vertex].forEach(v => {
-        if (!isVisited[v]) DFSR(v);
+      this.adjacencyList[vertex].forEach(neighbor => {
+        if (!isVisited[neighbor]) DFSR(neighbor);
       });
     }
     DFSR(start);
@@ -64,7 +64,7 @@ class Graph {
     return result; // ['A', 'C', 'E', 'F', 'D', 'B'] -> 재귀 DFS와 결과 다름 (시계방향)
     // 스택 구조이기 때문에 가장 빠른 B가 나중에 방문됨!
   }
-  BreadthFirstSearch(start) {
+  breadthFirstSearch(start) {
     const queue = [start];
     const result = [];
     const isVisited = {[start]: true}; // [] 안에 안넣으면 일반 문자열로 인식됨
