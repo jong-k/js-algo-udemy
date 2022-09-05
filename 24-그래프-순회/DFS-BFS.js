@@ -34,7 +34,6 @@ class Graph {
   depthFirstSearchRecursive(start) {
     const result = [];
     const isVisited = {};
-
     const DFSR = (vertex) => {
       // if (!this.adjacencyList[vertex].length) return; // 이렇게 안하고 아래처럼 해도 됨
       if (!vertex) return;
