@@ -1,18 +1,67 @@
-// 우선순위 큐를 힙이 아닌 배열로 작성
+// 우선순위 큐를 이진 힙으로 바꿔서 성능을 더 높임
+class Node {
+  constructor(val, priority) {
+    this.val = val;
+    this.priority = priority;
+  }
+}
+
 class PriorityQueue {
   constructor() {
     this.values = [];
   }
   enqueue(val, priority) {
-    this.values.push({ val, priority });
-    this.sort(); // add 하고나면 다시 정렬
+    let newNode = new Node(val, priority);
+    this.values.push(newNode);
+    this.bubbleUp();
   }
-  // 가장 작은 priority를 가진 값이 나와야 함
+  bubbleUp() {
+    let idx = this.values.length - 1;
+    const element = this.values[idx];
+    while (idx > 0) { // 루트 idx가 0이기 때문에
+      let parentIdx = Math.floor((idx - 1) / 2);
+      let parent = this.values[parentIdx];
+      if (element.priority >= parent.priority) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
+    }
+  }
   dequeue() {
-    return this.values.shift();
+    const min = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
+    }
+    return min;
   }
-  sort() {
-    this.values.sort((a, b) => a.priority - b.priority);
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftIdx = 2 * idx + 1;
+      let rightIdx = 2 * idx + 2;
+      let left, right; // 범위 확인 전 초기화
+      let swap = null;
+      if (leftIdx < length) {
+        left = this.values[leftIdx];
+        if (left.priority < element.priority) {
+          swap = leftIdx;
+        }
+      }
+      if (rightIdx < length) {
+        right = this.values[rightIdx];
+        if ((swap === null && right.priority < element.priority) || (swap !== null && right.priority < left.priority)) {
+          swap = rightIdx;
+        }
+      }
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
   }
 }
 
@@ -24,7 +73,7 @@ class WeightedGraph {
     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
   }
   addEdge(v1, v2, weight) {
-    this.adjacencyList[v1].push({ node: v2, weight }); // 키값 입력하지 않으면 프로퍼티값에 동일한 이름 들어감
+    this.adjacencyList[v1].push({ node: v2, weight });
     this.adjacencyList[v2].push({ node: v1, weight });
   }
   dijkstra(start, finish) {
@@ -44,9 +93,9 @@ class WeightedGraph {
       }
       previous[vertex] = null;
     }
-    // 반복문
+    // 반복
     while (nodes.values.length) {
-      smallest = nodes.dequeue().val; // 정점. 초기값 A
+      smallest = nodes.dequeue().val;
       if (smallest === finish) {
         while (previous[smallest]) {
           path.push(smallest);
@@ -54,11 +103,8 @@ class WeightedGraph {
         }
         break;
       }
-      // else로 해도 되지 않나..?
-      // 좌항은 smallest가 있을떄 (모든 큐 소진 x)
-      // 우항은 초기값일때
       if (smallest || distances[smallest] !== Infinity) {
-        for (let neighbor in this.adjacencyList[smallest]) { // neighbor는 인덱스
+        for (let neighbor in this.adjacencyList[smallest]) {
           // 인접 노드 찾기
           let nextNode = this.adjacencyList[smallest][neighbor];
           // 거리 계산
@@ -73,11 +119,9 @@ class WeightedGraph {
           }
         }
       }
-
     }
     return path.concat(smallest).reverse();
   }
-
 }
 
 const g = new WeightedGraph();
@@ -97,12 +141,5 @@ g.addEdge('C', 'F', 4);
 g.addEdge('D', 'E', 3);
 g.addEdge('D', 'F', 1);
 g.addEdge('F', 'E', 1);
-// 인접 리스트
-/*
-A: [{ node: 'B', weight: 4 }, { node: 'C', weight: 2 }],
-B: [{ node: 'A', weight: 4 }, { node: 'E', weight: 3}],
-C: [{ node: 'A', weight: 2 }, { node: 'F', weight: 4}],
-D: [{ node: 'C', weight: 2 }, { node: 'E', weight: 3}, { node: 'F', weight: 1}],
-E: [{ node: 'B', weight: 3 }, { node: 'D', weight: 3}, { node: 'F', weight: 1}],
-F: [{ node: 'C', weight: 4 }, { node: 'D', weight: 1}, { node: 'E', weight: 1}],
-*/
+
+g.dijkstra('A', 'E');
