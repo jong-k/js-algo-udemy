@@ -56,7 +56,7 @@ function bfs(graph, start) {
   while (queue.length) {
     const currentVertex = queue.shift();
     graph[currentVertex].forEach(neighbor => {
-      if (bfsInfo[neighbor].predecessor === null) {
+      if (bfsInfo[neighbor].distance === null) { // predecessor로 하면 루트 정점값 변형됨
         bfsInfo[neighbor].distance = bfsInfo[currentVertex].distance + 1;
         bfsInfo[neighbor].predecessor = currentVertex;
         queue.push(neighbor);
