@@ -88,8 +88,8 @@ class WeightedGraph {
         distances[vertex] = 0;
         nodes.enqueue(vertex, 0);
       } else {
-        distances[vertex] = Infinity;
-        nodes.enqueue(vertex, Infinity);
+        distances[vertex] = Number.MAX_SAFE_INTEGER;
+        nodes.enqueue(vertex, Number.MAX_SAFE_INTEGER);
       }
       previous[vertex] = null;
     }
@@ -103,7 +103,7 @@ class WeightedGraph {
         }
         break;
       }
-      if (smallest || distances[smallest] !== Infinity) {
+      if (smallest || distances[smallest] !== Number.MAX_SAFE_INTEGER) {
         for (let neighbor in this.adjacencyList[smallest]) {
           // 인접 노드 찾기
           let nextNode = this.adjacencyList[smallest][neighbor];

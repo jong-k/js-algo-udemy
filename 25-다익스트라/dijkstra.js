@@ -39,8 +39,8 @@ class WeightedGraph {
         distances[vertex] = 0;
         nodes.enqueue(vertex, 0);
       } else {
-        distances[vertex] = Infinity;
-        nodes.enqueue(vertex, Infinity);
+        distances[vertex] = Number.MAX_SAFE_INTEGER;
+        nodes.enqueue(vertex, Number.MAX_SAFE_INTEGER);
       }
       previous[vertex] = null;
     }
@@ -57,7 +57,7 @@ class WeightedGraph {
       // else로 해도 되지 않나..?
       // 좌항은 smallest가 있을떄 (모든 큐 소진 x)
       // 우항은 초기값일때
-      if (smallest || distances[smallest] !== Infinity) {
+      if (smallest || distances[smallest] !== Number.MAX_SAFE_INTEGER) {
         for (let neighbor in this.adjacencyList[smallest]) { // neighbor는 인덱스
           // 인접 노드 찾기
           let nextNode = this.adjacencyList[smallest][neighbor];
