@@ -44,7 +44,7 @@ class WeightedGraph {
       }
       previous[vertex] = null;
     }
-    // 반복문
+
     while (nodes.values.length) {
       smallest = nodes.dequeue().val; // 정점. 초기값 A
       if (smallest === finish) {
@@ -54,7 +54,7 @@ class WeightedGraph {
         }
         break;
       }
-      // else로 해도 되지 않나..?
+
       // 좌항은 smallest가 있을떄 (모든 큐 소진 x)
       // 우항은 초기값일때
       if (smallest || distances[smallest] !== Number.MAX_SAFE_INTEGER) {
